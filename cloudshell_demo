@@ -1,0 +1,16 @@
+aws s3 cp s3://30days-amplify-demo/dist.zip
+
+ls
+
+unzip dist.zip 
+
+vi index.html
+
+rm -r dist.zip 
+   
+zip -r code.zip .
+
+aws s3 cp code.zip s3://30days-amplify-demo/code.zip
+
+   
+aws amplify start-deployment --app-id d3tjoz9i4g0cam --branch-name staging --source-url s3://30days-amplify-demo/code.zip
