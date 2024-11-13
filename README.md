@@ -34,21 +34,21 @@ npm run build
          - aws amplify start-deployment --app-id $AMPLIFY_APP_ID --branch-name $BRANCH_NAME --source-url s3://$BUCKET_NAME/code.zip
 
 ### Additional Headers to Be Added
+*custom policy*
+
 customHeaders:
-  - pattern: "*.*"
+  - pattern: "**/*"
     headers:
-      - key: Strict-Transport-Security
-        value: max-age=31536000; includeSubDomains
-      - key: X-XSS-Protection
-        value: 1; mode=block
-      - key: X-Frame-Options
-        value: ALLOW-FROM https://url
-      - key: Content-Security-Policy
-        value: script-src 'self' https://cdn.jsdelivr.net/;  frame-ancestors
-          http://allowed-domain.com/ ;
-      - key: Cache-Control
-        value: no-store
-      - key: Referrer-Policy
-        value: Origin-when-cross-origin
       - key: X-Content-Type-Options
         value: nosniff
+      - key: X-XSS-Protection
+        value: 1; mode=block
+      - key: Strict-Transport-Security
+        value: max-age=31536000; includeSubDomains
+      - key: Content-Security-Policy
+        value: script-src 'self' https://cdn.jsdelivr.net/
+          'unsafe-eval';  frame-ancestors "domain";
+      - key: X-Frame-Options
+        value: ALLOW-FROM "domain_name"
+      - key: Pragma
+        value: no-cache
